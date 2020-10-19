@@ -16,12 +16,12 @@
 </head>
 
 <body>
-    <div class="home-btn d-none d-sm-block"><a href="index.html" class="text-white"><i class="fas fa-home h2"></i></a></div><!-- Begin page -->
+    <div class="home-btn d-none d-sm-block"><a href="#" class="text-white"><i class="fas fa-home h2"></i></a></div><!-- Begin page -->
     <div class="accountbg"></div>
     <div class="wrapper-page account-page-full">
         <div class="card">
             <div class="card-body">
-                <div class="text-center"><a href="index.html" class="logo"><img src="assets\images\logo-dark.png" height="22" alt="logo"></a></div>
+                <div class="text-center"><a href="#" class="logo"><img src="assets\images\logo-dark.png" height="22" alt="logo"></a></div>
                 <div class="p-3">
                     {{-- <h4 class="font-18 m-b-5 text-center">Welcome Back !</h4>
                     <p class="text-muted text-center">Sign in to continue to Veltrix.</p> --}}
