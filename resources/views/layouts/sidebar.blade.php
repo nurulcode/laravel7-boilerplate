@@ -199,13 +199,12 @@
                         @endcan
 
                         @can('user')
-                        <li><a href="{{ route('user.index') }}"><i class="ti-minus"></i>Users</a></li>
+                            <li><a href="{{ route('user.index') }}"><i class="ti-minus"></i>Users</a></li>
                         @endcan
 
                         @can('permission')
-                        <li><a href="{{ route('permission.index') }}"><i class="ti-minus"></i>Permission</a></li>
+                            <li><a href="{{ route('permission.index') }}"><i class="ti-minus"></i>Permission</a></li>
                         @endcan
-
                     </ul>
                 </li>
                 @endcan
