@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
@@ -55,6 +56,11 @@ class LoginController extends Controller
         ];
 
         if (auth()->attempt($login)) {
+            activity()->log( auth()->user()->name . ' Look, I logged something');
+            $user = auth()->user();
+            $user->ip_last_login =  $request->ip();
+            $user->last_login = Carbon::now();
+            $user->save();
             return redirect()->route('home');
         }
         return redirect()->route('login')->with('error', 'Incorrect email or password');

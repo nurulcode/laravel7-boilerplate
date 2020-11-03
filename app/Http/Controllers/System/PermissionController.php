@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\System;
 
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Permission;
@@ -16,7 +16,7 @@ class PermissionController extends Controller
     public function index()
     {
         $permission = Permission::get();
-        return view('permission',compact('permission'));
+        return view('system.permission.index',compact('permission'));
 
     }
 

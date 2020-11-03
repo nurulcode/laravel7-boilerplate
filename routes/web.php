@@ -19,11 +19,10 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::group(['middleware' => ['permission:system-list']], function () {
+Route::prefix('system')->namespace('System')->group( function () {
     Route::resource('role','RoleController')->middleware('permission:role')->except('show', );
     Route::resource('user','UserController')->middleware('permission:user');
     Route::resource('permission','PermissionController')->middleware('permission:permission')->only(['index', 'store']);
 });
-
 
 Route::get('/home', 'HomeController@index')->name('home');

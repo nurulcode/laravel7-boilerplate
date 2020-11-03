@@ -11,12 +11,9 @@ class AppCard extends Component
      *
      * @return void
      */
-    public $col1;
-    public $col2;
-    public function __construct($col1 , $col2)
+    public function __construct()
     {
-        $this->col1 = $col1;
-        $this->col2 = $col2;
+        //
     }
 
 

@@ -26,6 +26,31 @@ class PermissionSeeder extends Seeder
            'user',
            'permission',
 
+           'master-list',
+           'master-create',
+           'master-edit',
+           'master-delete',
+
+           'pegawai-list',
+           'pegawai-create',
+           'pegawai-edit',
+           'pegawai-delete',
+
+           'history-list',
+           'history-create',
+           'history-edit',
+           'history-delete',
+
+           'kepegawaian-list',
+           'kepegawaian-create',
+           'kepegawaian-edit',
+           'kepegawaian-delete',
+
+           'laporan-list',
+           'laporan-create',
+           'laporan-edit',
+           'laporan-delete',
+
         ];
 
         foreach ($permissions as $permission) {

@@ -30,10 +30,8 @@
     <link href="{{ asset('assets\css\icons.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('assets\css\style.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('assets\css\iziToast.css') }}" rel="stylesheet" type="text/css" />
-
-
     <style>
-        .btn-outline {
+         .btn-outline {
             color: #353958;
             background-color: #f1f1f1;
             border-color: #b8bce0;
@@ -71,7 +69,18 @@
         .page-title-box {
             padding: 15px 0
         }
+        .card-header {
+            padding: .5rem 0;
+        }
+        .btn {
+            font-size: 14;
+            border-radius: 0;
+        }
 
+        .badge {
+            border-radius: 0;
+
+        }
     </style>
 </head>
 
@@ -106,19 +115,8 @@
             <!-- Start content -->
             <div class="content">
                 <div class="container-fluid">
-                    {{-- <div class="page-title-box">
-                        <div class="row align-items-center">
-                            <div class="col-sm-6">
-                                <h4 class="page-title">@yield('page-title')</h4>
-                                <ol class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="javascript:void(0);">Veltrix</a></li>
-                                    <li class="breadcrumb-item"><a href="javascript:void(0);">Forms</a></li>
-                                    <li class="breadcrumb-item active">Form Validation</li>
-                                </ol>
-                            </div>
-                        </div>
-                    </div> --}}
-                    <!-- end row -->
+                        {{-- @include('layouts.breadcrumb') --}}
+                        {{ Session::get('success') }}
                     @yield('content')
                 </div>
                 <!-- container-fluid -->
@@ -134,6 +132,8 @@
         <!-- End Right content here -->
         <!-- ============================================================== -->
     </div>
+
+
     <!-- END wrapper -->
     <!-- jQuery  -->
     <script src="{{ asset('assets\js\jquery.min.js') }}"></script>
@@ -173,6 +173,9 @@
 
     <!-- Datatable init js -->
     <script src="{{ asset('assets\pages\datatables.init.js') }}"></script>
+
+    @include('layouts._messages')
+
     @yield('javascript')
     <!--App-->
     <script src="{{ asset('assets\js\app.js') }}"></script>

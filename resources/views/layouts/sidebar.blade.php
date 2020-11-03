@@ -193,17 +193,32 @@
                             </span>
                         </span>
                     </a>
-                    <ul class="submenu mm-collapse">
-                        @can('role')
-                            <li><a href="{{ route('role.index') }}"><i class="ti-minus"></i>Role</a></li>
+                    <ul class="submenu mm-collapse {{ activeMenu('system') }}">
+                        @can('manage-role')
+                            <li>
+                                <a href="{{ route('role.index') }}">
+                                    <i class="ion ion-ios-radio-button-off"></i>
+                                    Roles
+                                </a>
+                            </li>
                         @endcan
 
-                        @can('user')
-                            <li><a href="{{ route('user.index') }}"><i class="ti-minus"></i>Users</a></li>
+                        @can('manage-user')
+                            <li>
+                                <a href="{{ route('user.index') }}">
+                                    <i class="ion ion-ios-radio-button-off"></i>
+                                    Users
+                                </a>
+                            </li>
                         @endcan
 
-                        @can('permission')
-                            <li><a href="{{ route('permission.index') }}"><i class="ti-minus"></i>Permission</a></li>
+                        @can('manage-permission')
+                            <li>
+                                <a href="{{ route('permission.index') }}">
+                                    <i class="ion ion-ios-radio-button-off"></i>
+                                    Permissions
+                                </a>
+                            </li>
                         @endcan
                     </ul>
                 </li>

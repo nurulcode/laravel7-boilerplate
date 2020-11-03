@@ -1,15 +1,9 @@
 <div class="row justify-content-center">
-    <div class="{{ $col1 }}">
+    <div class="col-lg-12 col-md-12">
         <div class="card">
             <div class="card-body">
-                {{ $slot1 ?? '' }}
-            </div>
-        </div>
-    </div>
-    <div class="{{ $col2 }}">
-        <div class="card">
-            <div class="card-body">
-                {{ $slot2 ?? ''}}
+                <h4 class="card-title font-16 mt-0">{{ $title ?? '' }}</h4>
+                {{ $slot ?? '' }}
             </div>
         </div>
     </div>

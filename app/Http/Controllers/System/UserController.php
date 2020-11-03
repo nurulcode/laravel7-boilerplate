@@ -1,8 +1,7 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\System;
 
-use App\Http\Controllers\Controller;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -24,18 +23,29 @@ class UserController extends Controller
         if($request->ajax()){
             return datatables()->of($result)
                         ->addColumn('action', function($data){
-                            $action  = '<a class="btn btn-info btn-sm waves-effect waves-light" href="'.route("user.show", $data->id).'" ><i class="fas fa-eye"></i></a>';
-                            $action .= '&nbsp;';
-                            $action .= '<a class="btn btn-primary btn-sm waves-effect waves-light" href="'.route("user.edit", $data->id).'" ><i class="fas fa-edit"></i></a>';
+                            // $action  = '<a class="btn btn-info btn-sm waves-effect waves-light" href="'.route("user.show", $data->id).'" ><i class="fas fa-eye"></i></a>';
+                            // $action .= '&nbsp;';
+                            $action  = '<a class="btn btn-primary btn-sm waves-effect waves-light" href="'.route("user.edit", $data->id).'"><i class="fas fa-edit"></i></a>';
                             $action .= '&nbsp;';
                             $action .= '<button type="button" name="delete" id="'.$data->id.'" class="delete btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i></button>';
+
+
                             return $action;
                         })
-                        ->rawColumns(['action'])
+                        ->addColumn('roles', function($data){
+                            $roles = $data->getRoleNames();
+                            $role = '';
+                            foreach ($roles as $v) {
+                                $role .= '<label class="badge badge-primary">'.$v.'</label> ';
+                            }
+
+                            return $role;
+                        })
+                        ->rawColumns(['action', 'roles'])
                         ->addIndexColumn()
                         ->make(true);
         }
-        return view('user.index');
+        return view('system.user.index');
     }
 
     /**
@@ -46,7 +56,7 @@ class UserController extends Controller
     public function create()
     {
         $roles = Role::pluck('name','name')->all();
-        return view('user.create',compact('roles'));
+        return view('system.user.create',compact('roles'));
     }
 
     /**
@@ -57,21 +67,19 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, [
+        $request->validate( [
             'name' => 'required',
-            'username' => 'required|unique:users,username',
             'email' => 'required|unique:users,email',
-            'password' => 'required|same:confirm-password',
-            'confirm-password' => 'required',
+            'username' => 'required|unique:users,username',
+            // 'password' => 'required|same:confirm-password',
+            // 'confirm-password' => 'required',
         ]);
-
         $input = $request->all();
-        $input['password'] = Hash::make($input['password']);
-
+        $input['password'] = Hash::make('password');
         $user = User::create($input);
         $user->assignRole($request->input('roles'));
 
-        return redirect()->route('user.index')->with('success','Created successfully');
+        return redirect()->route('user.index')->with('success','Your data has bean submitted');
     }
 
     /**
@@ -82,7 +90,7 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        return view('user.show',compact('user'));
+        return view('system.user.show',compact('user'));
     }
 
     /**
@@ -98,7 +106,7 @@ class UserController extends Controller
         $roles = Role::pluck('name')->all();
         $userRole = $user->roles->pluck('name')->all();
 
-        return view('user.edit',compact('user','roles','userRole'));
+        return view('system.user.edit',compact('user','roles','userRole'));
     }
 
     /**
@@ -110,10 +118,9 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-
         $this->validate($request, [
             'name' => 'required',
-            'username' => 'required',
+            'username' => 'required|unique:users,username,' . $user->id,
             ]);
 
         $input = $request->all();
@@ -125,11 +132,11 @@ class UserController extends Controller
         }
 
         $user->update($input);
-        DB::table('model_has_roles')->where('model_id',$user->id)->delete();
-
-        $user->assignRole($request->input('roles'));
-
-        return redirect()->route('user.index')->with('success','Updated successfully');
+        if ($user->id !== 1) {
+            DB::table('model_has_roles')->where('model_id',$user->id)->delete();
+            $user->assignRole($request->input('roles'));
+        }
+        return redirect()->route('user.index')->with('success','Data question has been updated');
     }
 
     /**
@@ -141,10 +148,20 @@ class UserController extends Controller
     public function destroy(User $user)
     {
         if ($user->id == 1) {
-            return redirect()->route('user.index')->with('error', 'Delete failed');
-        }
+            return response()->json([
+                'color' => 'yellow',
+                'status' => 'error',
+                'message' => 'Error'
+            ]);        }
 
-        $user->delete()        ;
-        return redirect()->route('user.index')->with('success','Deleted successfully');
+        $user->delete();
+        // return response()->json($user);
+
+        return response()->json([
+            'color' => 'green',
+            'status' => 'success',
+            'message' => 'Your data has been deleted'
+        ]);
+
     }
 }
