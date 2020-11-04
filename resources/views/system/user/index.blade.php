@@ -83,10 +83,17 @@ User Manajement
         }).draw();
     });
 
+    function errorHandler(errors) {
+        $('#nameError').text(errors.name = errors.name ? errors.name : '');
+        $('#emailError').text(errors.email = errors.email ? errors.email : '');
+        $('#usernameError').text(errors.username = errors.username ? errors.username : '');
+    }
+
     $('#create-button').click(function () {
         $('#button-submit').val("Submit");
         $('#id').val(''); //valuenya menjadi kosong
-        $('#form').trigger("reset"); //mereset semua input dll didalamnya
+        $('#form').trigger("reset");
+        errorHandler('')
         $('#modal-title').html("Form"); //valuenya tambah pegawai baru
         $('#create-edit-modal').modal('show'); //modal tampil
     });
@@ -96,8 +103,6 @@ User Manajement
             submitHandler: function (form) {
                 var actionType = $('#button-submit').val();
                 $('#button-submit').html('Sending..');
-
-
                 $.ajax({
                     data: $('#form')
                         .serialize(), //function yang dipakai agar value pada form-control seperti input, textarea, select dll dapat digunakan pada URL query string ketika melakukan ajax request
@@ -110,44 +115,17 @@ User Manajement
                         $('#button-submit').html('Simpan'); //tombol simpan
                         var oTable = $('#table_pegawai').dataTable(); //inialisasi datatable
                         oTable.fnDraw(false); //reset datatable
-                        iziToast.show({
-                            color: data.color,
-                            title: data.status,
-                            message: data.message,
-                            position: 'topRight'
-                        });
-                        $('#nameError').text('');
-                        $('#emailError').text('');
-                        $('#usernameError').text('');
+                        toast(data);
                     },
                     error: function (response) { //jika error tampilkan error pada console
                         let errors = response.responseJSON.errors
-                        $('#nameError').text(errors.name = errors.name ? errors.name : '');
-                        $('#emailError').text(errors.email = errors.email ? errors.email : '');
-                        $('#usernameError').text(errors.username = errors.username ? errors.username : '');
+                        errorHandler(errors)
                         $('#button-submit').html('Simpan');
                     }
                 });
             }
         })
     }
-
-    $('body').on('click', '.edit-post', function () {
-        var data_id = $(this).data('id');
-        $.get('user/' + data_id + '/edit', function (data) {
-            $('#modal-title').html("Edit Post");
-            $('#button-submit').val("edit-post");
-            $('#create-edit-modal').modal('show');
-
-            //set value masing-masing id berdasarkan data yg diperoleh dari ajax get request diatas
-            $('#id').val(data.id);
-            $('#nama_pegawai').val(data.nama_pegawai);
-            $('#jenis_kelamin').val(data.jenis_kelamin);
-            $('#email').val(data.email);
-            $('#alamat').val(data.alamat);
-        })
-    });
-
     //Delete Data
     $(document).on('click', '.delete', function () {
         dataId = $(this).attr('id');
@@ -163,13 +141,7 @@ User Manajement
 
             },
             success: function (data) {
-                iziToast.show({
-                    color: data.color,
-                    title: data.status,
-                    message: data.message,
-                    position: 'topRight'
-                });
-
+                toast(data);
                 $('#delete-user-modal').modal('hide');
                 $('#delete-user-button').text('Hapus');
                 let oTable = $('#table-user').dataTable();

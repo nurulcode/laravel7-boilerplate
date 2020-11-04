@@ -177,6 +177,17 @@
 
     @include('layouts._messages')
 
+    <script>
+    function toast(data) {
+        iziToast.show({
+            color: data.color,
+            title: data.status,
+            message: data.message,
+            position: 'topRight'
+        });
+    }
+    </script>
+
     @yield('javascript')
     <!--App-->
     <script src="{{ asset('assets\js\app.js') }}"></script>

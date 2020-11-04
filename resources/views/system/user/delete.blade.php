@@ -7,7 +7,8 @@
             </div>
 
             <div class="modal-body text-center justify-content-center p-2">
-                <p class="modal-text">Kamu yakin ingin menghapus data ini?</p>
+                <p class="modal-text">Peringatan! Data yang dihapus tidak dapat dikembalikan kembali
+                </p>
             </div>
             <div class="modal-footer  p-2">
                 <button type="button" class="btn btn-danger" id="delete-user-button">Hapus</button>

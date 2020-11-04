@@ -72,9 +72,8 @@ class UserController extends Controller
             'name' => 'required',
             'email' => 'required|unique:users,email',
             'username' => 'required|unique:users,username',
-            // 'password' => 'required|same:confirm-password',
-            // 'confirm-password' => 'required',
         ]);
+
         $input = $request->all();
         $input['password'] = Hash::make('password');
         $user = User::create($input);
