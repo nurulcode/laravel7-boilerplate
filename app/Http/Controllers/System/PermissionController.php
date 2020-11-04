@@ -37,7 +37,7 @@ class PermissionController extends Controller
         Permission::firstOrCreate([
             'name' => $request->name
         ]);
-        return redirect()->back();
+        return redirect()->route('permission.index')->with('success','Data question has been submitted');
     }
 
 }

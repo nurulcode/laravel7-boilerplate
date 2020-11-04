@@ -173,6 +173,7 @@
 
     <!-- Datatable init js -->
     <script src="{{ asset('assets\pages\datatables.init.js') }}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.min.js" integrity="sha256-sPB0F50YUDK0otDnsfNHawYmA5M0pjjUf4TvRJkGFrI=" crossorigin="anonymous"></script>
 
     @include('layouts._messages')
 

@@ -1,4 +1,4 @@
-<div class="modal fade bs-example-modal-center" tabindex="-1" id="delete-user-modal" role="dialog" data-backdrop="false">
+<div class="modal fade bs-example-modal-center" tabindex="-1" id="delete-user-modal" role="dialog">
     <div class="modal-dialog ">
         <div class="modal-content">
             <div class="modal-header">

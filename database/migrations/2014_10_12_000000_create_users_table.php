@@ -22,7 +22,7 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->boolean('active')->default(false);
             $table->timestamp('last_login')->nullable();
-            $table->string('ip_address', 16)->nullable();
+            $table->string('ip_last_login', 16)->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

@@ -11,9 +11,9 @@ User Manajement
                 <h5 class="font-16 mt-0 align-middle text-capitalize">user manajement</h5>
             </div>
             <div class="col-md-6  col text-right">
-                <a href="{{ route('user.create') }}" class="btn btn-primary waves-light">
-                    Tambah Data
-                </a>
+
+                <a href="javascript:void(0)" class="btn btn-primary waves-light" id="create-button">Tambah Data</a>
+
             </div>
         </div>
     </x-slot>
@@ -31,6 +31,7 @@ User Manajement
 </x-app-card>
 
 @include('system.user.delete')
+@include('system.user.create')
 @endsection
 
 @section('javascript')
@@ -82,6 +83,70 @@ User Manajement
         }).draw();
     });
 
+    $('#create-button').click(function () {
+        $('#button-submit').val("Submit");
+        $('#id').val(''); //valuenya menjadi kosong
+        $('#form').trigger("reset"); //mereset semua input dll didalamnya
+        $('#modal-title').html("Form"); //valuenya tambah pegawai baru
+        $('#create-edit-modal').modal('show'); //modal tampil
+    });
+
+    if ($("#form").length > 0) {
+        $("#form").validate({
+            submitHandler: function (form) {
+                var actionType = $('#button-submit').val();
+                $('#button-submit').html('Sending..');
+
+
+                $.ajax({
+                    data: $('#form')
+                        .serialize(), //function yang dipakai agar value pada form-control seperti input, textarea, select dll dapat digunakan pada URL query string ketika melakukan ajax request
+                    url: "{{ route('user.store') }}", //url simpan data
+                    type: "POST", //karena simpan kita pakai method POST
+                    dataType: 'json', //data tipe kita kirim berupa JSON
+                    success: function (data) { //jika berhasil
+                        $('#form').trigger("reset"); //form reset
+                        $('#create-edit-modal').modal('hide'); //modal hide
+                        $('#button-submit').html('Simpan'); //tombol simpan
+                        var oTable = $('#table_pegawai').dataTable(); //inialisasi datatable
+                        oTable.fnDraw(false); //reset datatable
+                        iziToast.show({
+                            color: data.color,
+                            title: data.status,
+                            message: data.message,
+                            position: 'topRight'
+                        });
+                        $('#nameError').text('');
+                        $('#emailError').text('');
+                        $('#usernameError').text('');
+                    },
+                    error: function (response) { //jika error tampilkan error pada console
+                        let errors = response.responseJSON.errors
+                        $('#nameError').text(errors.name = errors.name ? errors.name : '');
+                        $('#emailError').text(errors.email = errors.email ? errors.email : '');
+                        $('#usernameError').text(errors.username = errors.username ? errors.username : '');
+                        $('#button-submit').html('Simpan');
+                    }
+                });
+            }
+        })
+    }
+
+    $('body').on('click', '.edit-post', function () {
+        var data_id = $(this).data('id');
+        $.get('user/' + data_id + '/edit', function (data) {
+            $('#modal-title').html("Edit Post");
+            $('#button-submit').val("edit-post");
+            $('#create-edit-modal').modal('show');
+
+            //set value masing-masing id berdasarkan data yg diperoleh dari ajax get request diatas
+            $('#id').val(data.id);
+            $('#nama_pegawai').val(data.nama_pegawai);
+            $('#jenis_kelamin').val(data.jenis_kelamin);
+            $('#email').val(data.email);
+            $('#alamat').val(data.alamat);
+        })
+    });
 
     //Delete Data
     $(document).on('click', '.delete', function () {
@@ -104,6 +169,7 @@ User Manajement
                     message: data.message,
                     position: 'topRight'
                 });
+
                 $('#delete-user-modal').modal('hide');
                 $('#delete-user-button').text('Hapus');
                 let oTable = $('#table-user').dataTable();

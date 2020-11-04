@@ -82,7 +82,7 @@ class RoleController extends Controller
             $role->save();
             $role->syncPermissions($request->input('permission'));
 
-        return redirect()->route('role.index')->with('success','Created successfully');
+        return redirect()->route('role.index')->with('success','Data question has been submitted');
     }
 
     /**
@@ -123,7 +123,7 @@ class RoleController extends Controller
 
         $role->syncPermissions($request->input('permission'));
 
-        return redirect()->route('role.index')->with('success','Updated successfully');
+        return redirect()->route('role.index')->with('success','Data question has been updated');
 
     }
 
@@ -136,8 +136,11 @@ class RoleController extends Controller
     public function destroy(Role $role)
     {
         $role->delete();
-        return response()->json($role);
-
+        return response()->json([
+            'color' => 'green',
+            'status' => 'success',
+            'message' => 'Your data has been deleted'
+        ]);
         // return redirect()->route('role.index')->with('success','Deleted successfully');
     }
 }

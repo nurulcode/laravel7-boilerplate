@@ -76,30 +76,6 @@ Role Manajemenet
     });
 
 
-    // Insert Data
-    $('#form-insert-role').on('submit', function (e) {
-        e.preventDefault();
-        $('#submit').html('Sending..');
-        $.ajax({
-            data: $('#form-insert-role')
-                .serialize(),
-            url: "{{ route('role.store') }}",
-            type: "POST",
-            dataType: 'json',
-            success: function (data) {
-
-                $('#form-insert-role').trigger("reset");
-                $('#submit').html('Simpan');
-                let oTable = $('#table-role').dataTable();
-                oTable.fnDraw(false);
-            },
-            error: function (data) {
-                console.log('Error:', data);
-                $('#submit').html('Simpan');
-            }
-        });
-    })
-
     //Delete Data
     $(document).on('click', '.delete', function () {
         dataId = $(this).attr('id');
@@ -113,6 +89,12 @@ Role Manajemenet
                     $('#delete-role-button').text('Loading ...');
                 },
                 success: function (data) {
+                    iziToast.show({
+                    color: data.color,
+                    title: data.status,
+                    message: data.message,
+                    position: 'topRight'
+                });
                     setTimeout(function () {
                         $('#delete-role-modal').modal('hide');
                         $('#delete-role-button').text('Hapus');

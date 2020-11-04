@@ -1,110 +1,73 @@
-@extends("layouts.global")
-@section("title") Form @endsection
-
-@section('content')
-<x-app-card>
-    <x-slot name="title">
-        <h4 class="card-title font-16 mt-0">Form</h4>
-    </x-slot>
-    <hr>
-    <form action="{{ route('user.store') }}" method="post" enctype="multipart/form-data">
-        @csrf
-        <div class="form-group row">
-            <label class="col-sm-3 col-form-label">Nama Lengkap</label>
-            <div class="col-sm-9">
-                <input name="name" value="{{ old('name') }}" type="text" class="form-control {{ $errors->has('name') ? 'is-invalid' : '' }}">
-                @if($errors->has('name'))
-                <div class="invalid-feedback">
-                    <strong>{{ $errors->first('name') }}</strong>
-                </div>
-                @endif
+<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true" id="create-edit-modal">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title mt-0" id="modal-title"></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
             </div>
+            <x-app-card>
+                <form id="form" name="form" class="form-horizontal">
+                    <div class="modal-body">
+
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Nama Lengkap</label>
+                            <div class="col-sm-9">
+                                <input id="name" name="name" value="" placeholder="Kolom Nama" type="text" class="form-control">
+                                <small class="text-danger" id="nameError"></small>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Email</label>
+                            <div class="col-sm-9">
+                                <input id="email" name="email" value="" placeholder="Kolom Email" type="text" class="form-control">
+                                <small class="text-danger" id="emailError"></small>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Username</label>
+                            <div class="col-sm-9">
+                                <input id="username" name="username" value="" placeholder="Kolom Username" type="text" class="form-control">
+                                <small class="text-danger" id="usernameError"></small>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Status</label>
+                            <div class="col-sm-9">
+                                <div class="form-group">
+                                    <select class="form-control" name="active">
+                                        <option>--Pilih--</option>
+                                        @foreach (array(1 => 'Active', 0 => 'Inactive') as $key => $v)
+                                        <option value="{{ $key }}">{{ $v }}</option>
+                                        @endforeach
+                                    </select>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group row ">
+                            <label class="col-sm-3 col-form-label">Roles</label>
+                            <div class="col-sm-9">
+                                <select class="select2 name=" roles[]" form-control select2-multiple" multiple="multiple" multiple="multiple" data-placeholder="Choose ...">
+                                    @foreach ($roles as $result)
+                                        <option value="{{ $result }}">{{ $result }}</option>
+                                    @endforeach
+                                </select>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <div class="col-sm-offset-2 col-sm-12">
+                            <button type="submit" class="btn btn-primary btn-block" id="button-submit" value="create">Simpan
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </x-app-card>
         </div>
-
-        <div class="form-group row">
-            <label class="col-sm-3 col-form-label">Email</label>
-            <div class="col-sm-9">
-                <input name="email" value="{{ old('email') }}" type="text" class="form-control {{ $errors->has('email') ? 'is-invalid' : '' }}">
-                @if($errors->has('email'))
-                <div class="invalid-feedback">
-                    <strong>{{ $errors->first('email') }}</strong>
-                </div>
-                @endif
-            </div>
-        </div>
-
-        <div class="form-group row">
-            <label class="col-sm-3 col-form-label">Username</label>
-            <div class="col-sm-9">
-                <input name="username" value="{{ old('username') }}" type="text" class="form-control {{ $errors->has('username') ? 'is-invalid' : '' }}">
-                @if($errors->has('username'))
-                <div class="invalid-feedback">
-                    <strong>{{ $errors->first('username') }}</strong>
-                </div>
-                @endif
-            </div>
-        </div>
-
-
-        {{-- <div class="form-group row">
-            <label class="col-sm-3 col-form-label">Password</label>
-            <div class="col-sm-9">
-                <input name="password" value="{{ old('password') }}" type="password" class="form-control {{ $errors->has('password') ? 'is-invalid' : '' }}">
-                @if($errors->has('password'))
-                <div class="invalid-feedback">
-                    <strong>{{ $errors->first('password') }}</strong>
-                </div>
-                @endif
-            </div>
-        </div> --}}
-
-        {{-- <div class="form-group row">
-            <label class="col-sm-3 col-form-label">Confirm Password</label>
-            <div class="col-sm-9">
-                <input name="confirm-password" value="{{ old('confirm-password') }}" type="password" class="form-control {{ $errors->has('confirm-password') ? 'is-invalid' : '' }}">
-                @if($errors->has('confirm-password'))
-                <div class="invalid-feedback">
-                    <strong>{{ $errors->first('confirm-password') }}</strong>
-                </div>
-                @endif
-            </div>
-        </div> --}}
-
-        <div class="form-group row">
-            <label class="col-sm-3 col-form-label">Status</label>
-            <div class="col-sm-9">
-                <div class="form-group">
-                    <select class="form-control" name="active">
-                        @foreach (array(1  => 'Active', 0 => 'Inactive') as $key => $v)
-                            <option value="{{ $key }}">{{ $v }}</option>
-                        @endforeach
-                    </select>
-
-                  </div>
-            </div>
-        </div>
-
-        <hr>
-        <div class="form-group row d-flex align-items-center">
-            <label class="col-sm-3">Roles</label>
-            <div class="col-sm-9">
-                @foreach ($roles as $result)
-                <input type="checkbox" name="roles[]" id="{{ $result }}" value="{{ $result }}">
-                <label for="{{ $result }}">{{ $result }}</label>
-                @endforeach
-                <br>
-            </div>
-        </div>
-        <hr>
-        <div class="form-group row mt-5 text-right">
-            <label class="col-sm-3 col-form-label"></label>
-            <div class="col-sm-9">
-                <div>
-                    <button type="submit" class="btn btn-primary waves-effect waves-light mr-1">Submit</button>
-                    <button type="reset" class="btn btn-secondary waves-effect">Reset</button>
-                </div>
-            </div>
-        </div>
-    </form>
-</x-app-card>
-@endsection
+    </div>
+</div>

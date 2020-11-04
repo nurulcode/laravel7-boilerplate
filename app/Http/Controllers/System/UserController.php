@@ -45,7 +45,8 @@ class UserController extends Controller
                         ->addIndexColumn()
                         ->make(true);
         }
-        return view('system.user.index');
+        $roles = Role::pluck('name','name')->all();
+        return view('system.user.index', compact('roles'));
     }
 
     /**
@@ -79,7 +80,13 @@ class UserController extends Controller
         $user = User::create($input);
         $user->assignRole($request->input('roles'));
 
-        return redirect()->route('user.index')->with('success','Your data has bean submitted');
+        return response()->json([
+            'color' => 'green',
+            'status' => 'success',
+            'message' => 'Your data has been submitted'
+        ]);
+
+        // return redirect()->route('user.index')->with('success','Your data has bean submitted');
     }
 
     /**
