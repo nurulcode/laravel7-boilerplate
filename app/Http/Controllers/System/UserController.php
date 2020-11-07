@@ -17,15 +17,15 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
         $result = User::get();
-        if($request->ajax()){
+        if(request()->ajax()){
             return datatables()->of($result)
                         ->addColumn('action', function($data){
                             // $action  = '<a class="btn btn-info btn-sm waves-effect waves-light" href="'.route("user.show", $data->id).'" ><i class="fas fa-eye"></i></a>';
                             // $action .= '&nbsp;';
-                            $action  = '<a class="btn btn-primary btn-sm waves-effect waves-light" href="'.route("user.edit", $data->id).'"><i class="fas fa-edit"></i></a>';
+                            $action  = '<a class="btn btn-primary btn-sm waves-effect waves-light" alt="Girl in a jacket" href="'.route("user.edit", $data->id).'"><i class="fas fa-edit"></i></a>';
                             $action .= '&nbsp;';
                             $action .= '<button type="button" name="delete" id="'.$data->id.'" class="delete btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i></button>';
 

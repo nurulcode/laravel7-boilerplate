@@ -12,7 +12,7 @@ User Manajement
             </div>
             <div class="col-md-6  col text-right">
 
-                <a href="javascript:void(0)" class="btn btn-primary waves-light" id="create-button">Tambah Data</a>
+                <a href="javascript:void(0)" class="btn btn-primary waves-light mb-3" id="create-button">Tambah Data</a>
 
             </div>
         </div>

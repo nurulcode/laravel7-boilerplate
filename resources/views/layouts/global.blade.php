@@ -12,7 +12,7 @@
     <meta content="Themesbrand" name="author" />
     <link rel="shortcut icon" href="{{ asset('assets\images\favicon.ico') }}" />
 
-    <link rel="shortcut icon" href="assets\images\favicon.ico">
+    <link rel="shortcut icon" href="{{ asset('assets\images\favicon.ico') }}">
     <!-- Plugins css -->
 
     <link href="{{ asset('plugins\datatables\dataTables.bootstrap4.min.css') }}" rel="stylesheet" type="text/css">
@@ -30,8 +30,10 @@
     <link href="{{ asset('assets\css\icons.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('assets\css\style.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('assets\css\iziToast.css') }}" rel="stylesheet" type="text/css" />
+
+
     <style>
-         .btn-outline {
+        .btn-outline {
             color: #353958;
             background-color: #f1f1f1;
             border-color: #b8bce0;
@@ -45,14 +47,11 @@
             background: #a9afe4;
             color: #ffffff;
             border-color: #a9afe4;
-
         }
 
         /* for demo purpose only */
-
         body {
             padding: 20px 0;
-            font-family: Roboto, sans-serif;
         }
 
         h1 {
@@ -69,9 +68,15 @@
         .page-title-box {
             padding: 15px 0
         }
+
         .card-header {
             padding: .5rem 0;
         }
+
+        .card-body {
+            padding: 1rem 1.25;
+        }
+
         .btn {
             font-size: 14;
             border-radius: 0;
@@ -79,8 +84,15 @@
 
         .badge {
             border-radius: 0;
-
         }
+
+        #sidebar-menu>ul>li>a:active,
+        #sidebar-menu>ul>li>a:focus,
+        #sidebar-menu>ul>li>a:hover {
+            color: #ffffff !important;
+            background-color: #626ed4 text-decoration: none
+        }
+
     </style>
 </head>
 
@@ -101,36 +113,34 @@
                 </a>
             </div>
 
-         @include('layouts.navbar')
+            @include('layouts._navbar')
         </div>
         <!-- Top Bar End -->
 
         <!-- ========== Left Sidebar Start ========== -->
-        @include('layouts.sidebar');
+        @include('layouts._sidebar');
         <!-- Left Sidebar End -->
         <!-- ============================================================== -->
         <!-- Start right Content here -->
         <!-- ============================================================== -->
         <div class="content-page">
             <!-- Start content -->
-            <div class="content">
-                <div class="container-fluid">
-                        {{-- @include('layouts.breadcrumb') --}}
-                        {{ Session::get('success') }}
-                    @yield('content')
+            <div class="content" ">
+                <div class=" container-fluid">
+                {{-- @include('layouts._breadcrumb') --}}
+                <div id="loader">
+                    <div class="spinner"></div>
                 </div>
-                <!-- container-fluid -->
+                @yield('content')
             </div>
-            <!-- content -->
-            <footer class="footer block">
-                © 2019 Veltrix <span class="d-none d-sm-inline-block">
-                    <i class="mdi mdi-heart text-danger"></i> Themesbrand
-                </span>.
-            </footer>
+            <!-- container-fluid -->
+            @include('layouts._footer');
         </div>
-        <!-- ============================================================== -->
-        <!-- End Right content here -->
-        <!-- ============================================================== -->
+        <!-- content -->
+    </div>
+    <!-- ============================================================== -->
+    <!-- End Right content here -->
+    <!-- ============================================================== -->
     </div>
 
 
@@ -178,14 +188,17 @@
     @include('layouts._messages')
 
     <script>
-    function toast(data) {
-        iziToast.show({
-            color: data.color,
-            title: data.status,
-            message: data.message,
-            position: 'topRight'
-        });
-    }
+
+
+        function toast(data) {
+            iziToast.show({
+                color: data.color ?? 'green',
+                title: data.status ?? 'success',
+                message: data.message ?? 'Data has been success',
+                position: 'topRight'
+            });
+        }
+
     </script>
 
     @yield('javascript')

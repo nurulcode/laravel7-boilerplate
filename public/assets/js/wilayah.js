@@ -1,12 +1,70 @@
 $(document).ready(function () {
 
+
+
+    let kelurahan = pasien.kelurahan
+    if (kelurahan) {
+        let provinsi = pasien.kelurahan.kecamatan.kabupaten.provinsi
+        let kabupaten = pasien.kelurahan.kecamatan.kabupaten
+        let kecamatan = pasien.kelurahan.kecamatan
+
+        $.ajax({
+            type: 'GET',
+            url: '/provinsi',
+            success: function (response) {
+                $('#provinsi').append(`<option value="0" disabled selected>--Select--</option>`);
+                response.forEach(element => {
+                    $('#provinsi').append(`<option value="${element['id']}" ${element['id'] == provinsi.id ? 'selected' : '' } >${element['nama']}</option>`);
+                });
+            }
+        });
+
+        $.ajax({
+            type: 'GET',
+            url: '/kabupaten/' + provinsi.id,
+            success: function (response) {
+                $('#kabupaten').append(`<option value="0" disabled selected>--Select--</option>`);
+                response.forEach(element => {
+                    $('#kabupaten').append(`<option value="${element['id']}" ${element['id'] == kabupaten.id ? 'selected' : '' } >${element['nama']}</option>`);
+                });
+            }
+        });
+
+        $.ajax({
+            type: 'GET',
+            url: '/kecamatan/' + kabupaten.id,
+            success: function (response) {
+                $('#kecamatan').append(`<option value="0" disabled selected>--Select--</option>`);
+                response.forEach(element => {
+                    $('#kecamatan').append(`<option value="${element['id']}" ${element['id'] == kecamatan.id ? 'selected' : '' } >${element['nama']}</option>`);
+                });
+            }
+        });
+
+        $.ajax({
+            type: 'GET',
+            url: '/kelurahan/' + kecamatan.id,
+            success: function (response) {
+                $('#kelurahan').append(`<option value="0" disabled selected>--Select--</option>`);
+                response.forEach(element => {
+                    $('#kelurahan').append(`<option value="${element['id']}" ${element['id'] == kelurahan.id ? 'selected' : '' } >${element['nama']}</option>`);
+                });
+            }
+        });
+
+    }
+
+
+
+
+
     $.ajax({
         type: 'GET',
-        url: '/provinsi',
+        url: '/suku',
         success: function (response) {
-            $('#provinsi').append(`<option value="0" disabled selected>--Select--</option>`);
+            $('#suku').append(`<option value="0" disabled selected>--Select--</option>`);
             response.forEach(element => {
-                $('#provinsi').append(`<option value="${element['id']}">${element['nama']}</option>`);
+                $('#suku').append(`<option value="${element['id']}" ${element['id'] == pasien.suku_id ? 'selected' : '' }>${element['uraian']}</option>`);
             });
         }
     });

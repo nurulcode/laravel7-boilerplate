@@ -38,9 +38,8 @@
                             <div class="col-sm-9">
                                 <div class="form-group">
                                     <select class="form-control" id="active" name="active">
-                                        <option>--Pilih--</option>
                                         @foreach (array(1 => 'Active', 0 => 'Inactive') as $key => $v)
-                                        <option value="{{ $key }}" {{ !$key ? 'selected' : '' }}>{{ $v }}</option>
+                                        <option value="{{ $key }}" {{  !$key ? 'selected' : ''   }}>{{ $v }}</option>
                                         @endforeach
                                     </select>
                                 </div>

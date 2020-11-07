@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Models\Registrasi\Pasien;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -39,4 +40,10 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function pasiens()
+    {
+        return $this->hasMany('App\Modals\Pasien');
+    }
+
 }

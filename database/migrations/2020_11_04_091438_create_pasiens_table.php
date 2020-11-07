@@ -15,8 +15,9 @@ class CreatePasiensTable extends Migration
     {
         Schema::create('pasiens', function (Blueprint $table) {
             $table->id('id');
-            $table->string('no_rekam_medis')->unique()->nullable();
-            $table->dateTime('tanggal_registrasi')->nullable();
+            $table->string('no_rekam_medis')->unique();
+            $table->dateTime('tanggal_registrasi');
+
             $table->string('jenis_identitas')->nullable();
             $table->string('nomor_identitas')->nullable();
             $table->string('nama')->nullable();
@@ -45,6 +46,9 @@ class CreatePasiensTable extends Migration
             $table->string('alamat_keluarga')->nullable();
             $table->string('telepon_keluarga')->nullable();
 
+            $table->unsignedBigInteger('created_by')->nullable();
+
+
             $table->timestamps();
 
             $table->foreign('suku_id')
@@ -52,11 +56,20 @@ class CreatePasiensTable extends Migration
                 ->on('sukus')
                 ->onUpdate('cascade')
                 ->onDelete('set null');
+
             $table->foreign('kelurahan_id')
                 ->references('id')
                 ->on('kelurahans')
                 ->onUpdate('cascade')
                 ->onDelete('set null');
+
+            $table->foreign('created_by')
+                ->references('id')
+                ->on('users')
+                ->onUpdate('cascade')
+                ->onDelete('set null');
+
+
         });
     }
 

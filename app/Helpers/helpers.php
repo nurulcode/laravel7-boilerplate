@@ -3,10 +3,18 @@
 // use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Request;
 
-function activeMenu($uri = '') {
+function activeSubMenu($uri = '') {
     $active = '';
     if (Request::segment(1) === $uri) {
         $active = 'mm-show';
+    }
+    return $active;
+}
+
+function activeMenu($uri = '') {
+    $active = '';
+    if (Request::segment(1) === $uri) {
+        $active = 'mm-active';
     }
     return $active;
 }
