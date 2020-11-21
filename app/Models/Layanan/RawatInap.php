@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models\Registrasi;
+namespace App\Models\Layanan;
 
 use Illuminate\Database\Eloquent\Model;
 

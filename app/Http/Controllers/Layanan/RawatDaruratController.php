@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Http\Controllers\Registrasi;
+namespace App\Http\Controllers\Layanan;
 
-use App\Models\Registrasi\RawatDarurat;
+use App\Models\Layanan\RawatDarurat;
 use Illuminate\Http\Request;
 
 class RawatDaruratController extends Controller
@@ -24,7 +24,7 @@ class RawatDaruratController extends Controller
      */
     public function create()
     {
-        //
+        return view('registrasi.rawat-darurat');
     }
 
     /**

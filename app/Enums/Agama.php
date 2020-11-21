@@ -11,7 +11,7 @@ use BenSampo\Enum\Enum;
  */
 final class Agama extends Enum
 {
-    const Islam     = 1;
+    const Islam     = 1; //(int) 1 or (string) Islam ? isl
     const Protestan = 2;
     const Katolik   = 3;
     const Hindu     = 4;

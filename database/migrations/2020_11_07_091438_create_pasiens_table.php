@@ -47,7 +47,7 @@ class CreatePasiensTable extends Migration
             $table->string('telepon_keluarga')->nullable();
 
             $table->unsignedBigInteger('created_by')->nullable();
-
+            $table->unsignedBigInteger('updated_by')->nullable();
 
             $table->timestamps();
 

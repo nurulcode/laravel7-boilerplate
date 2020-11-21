@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\Registrasi;
+namespace App\Http\Controllers\Master;
 
-use App\Models\Registrasi\RawatInap;
+use App\Http\Controllers\Controller;
+use App\Models\Master\CaraPembayaran;
 use Illuminate\Http\Request;
 
-class RawatInapController extends Controller
+class CaraPembayaranController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -41,10 +42,10 @@ class RawatInapController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\RawatInap  $rawatInap
+     * @param  \App\Models\Master\CaraPembayaran  $caraPembayaran
      * @return \Illuminate\Http\Response
      */
-    public function show(RawatInap $rawatInap)
+    public function show(CaraPembayaran $caraPembayaran)
     {
         //
     }
@@ -52,10 +53,10 @@ class RawatInapController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\RawatInap  $rawatInap
+     * @param  \App\Models\Master\CaraPembayaran  $caraPembayaran
      * @return \Illuminate\Http\Response
      */
-    public function edit(RawatInap $rawatInap)
+    public function edit(CaraPembayaran $caraPembayaran)
     {
         //
     }
@@ -64,10 +65,10 @@ class RawatInapController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\RawatInap  $rawatInap
+     * @param  \App\Models\Master\CaraPembayaran  $caraPembayaran
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, RawatInap $rawatInap)
+    public function update(Request $request, CaraPembayaran $caraPembayaran)
     {
         //
     }
@@ -75,10 +76,10 @@ class RawatInapController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\RawatInap  $rawatInap
+     * @param  \App\Models\Master\CaraPembayaran  $caraPembayaran
      * @return \Illuminate\Http\Response
      */
-    public function destroy(RawatInap $rawatInap)
+    public function destroy(CaraPembayaran $caraPembayaran)
     {
         //
     }

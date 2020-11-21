@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers;
 
-
+use App\Http\Requests\UpdatePasienRequest;
 use App\Models\Pasien;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
 class PasienController extends Controller
 {
@@ -20,13 +19,11 @@ class PasienController extends Controller
         if(request()->ajax()){
             return datatables()->of($result)
                         ->addColumn('action', function($data){
-                            $action  = '<a class="btn btn-info btn-sm waves-effect waves-light" href="'.route("pasien.show", $data->id).'" ><i class="fas fa-eye"></i></a>';
+                            $action  = '<a class="show btn btn-info btn-sm waves-effect waves-light" id="'.$data->id.'" href="javascript:void(0)" ><i class="fas fa-eye"></i></a>';
                             $action .= '&nbsp;';
                             $action .= '<a class="btn btn-primary btn-sm waves-effect waves-light" href="'.route("pasien.edit", $data->id).'"><i class="fas fa-edit"></i></a>';
                             // $action .= '&nbsp;';
                             // $action .= '<button type="button" name="delete" id="'.$data->id.'" class="delete btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i></button>';
-
-
                             return $action;
                         })
                         ->addColumn('lahir', function($data){
@@ -96,7 +93,6 @@ class PasienController extends Controller
      */
     public function edit(Pasien $pasien)
     {
-        // return $pasien->kelurahan->kecamatan->kabupaten->provinsi;
         $pasien->kelurahan->kecamatan->kabupaten->provinsi ?? '';
         return view('pasien.edit',
         [
@@ -120,22 +116,8 @@ class PasienController extends Controller
      * @param  \App\Pasien  $pasien
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Pasien $pasien)
+    public function update(UpdatePasienRequest $request, Pasien $pasien)
     {
-        $this->validate($request, [
-            'id' => 'required|unique:pasiens,id,' . $pasien->id,
-            'no_rekam_medis' => 'required|unique:pasiens,no_rekam_medis,' . $pasien->id,
-            'nama' => 'required',
-            'tempat_lahir' => 'required',
-            'tanggal_lahir' => 'required',
-            'alamat' => 'required',
-            'nama_ibu' => 'required',
-            'jenis_kelamin' => 'required',
-            'tanggal_lahir' => 'required',
-            'tanggal_lahir' => 'required',
-            'name' => 'require'
-        ]);
-
         $pasien->update($request->except('id', 'no_rekam_medis', 'provinsi', 'kabupaten', 'kecamatan'));
         return response()->json([
             'status'=> 'success',

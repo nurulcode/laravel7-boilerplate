@@ -38,4 +38,6 @@ class Pasien extends Model
          return $query->orderby('no_rekam_medis', 'DESC');
     }
 
+
+
 }

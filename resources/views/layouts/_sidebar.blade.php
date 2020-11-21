@@ -10,7 +10,9 @@
                         <span>Dashboard</span>
                     </a>
                 </li>
-{{--
+
+
+
                 <li>
                     <a href="javascript:void(0);" class="waves-effect">
                         <i class="ti-view-list-alt"></i>
@@ -21,10 +23,10 @@
                         </span>
                     </a>
                     <ul class="submenu mm-collapse">
-                        <li><a href="#"><i class="ti-minus"></i>Role</a></li>
+                        <li><a href="#" cla><i class="ion ion-ios-radio-button-off"></i>Cara pembayaran</a></li>
                     </ul>
                 </li>
-
+{{--
                 <li>
                     <a href="javascript:void(0);" class="waves-effect">
                         <i class="ti-view-list-alt"></i>
@@ -35,7 +37,7 @@
                         </span>
                     </a>
                     <ul class="submenu mm-collapse">
-                        <li><a href="#"><i class="ti-minus"></i>Role</a></li>
+                        <li><a href="#"><i class="ion ion-ios-radio-button-off"></i>Role</a></li>
                     </ul>
                 </li>
 
@@ -49,7 +51,7 @@
                         </span>
                     </a>
                     <ul class="submenu mm-collapse">
-                        <li><a href="#"><i class="ti-minus"></i>Role</a></li>
+                        <li><a href="#"><i class="ion ion-ios-radio-button-off"></i>Role</a></li>
                     </ul>
                 </li>
 
@@ -84,9 +86,9 @@
                         </span>
                     </a>
                     <ul class="submenu mm-collapse">
-                        <li><a href="{{ route('role.index') }}"><i class="ti-minus"></i>Role</a></li>
-                        <li><a href="{{ route('users.index') }}"><i class="ti-minus"></i>Users</a></li>
-                        <li><a href="{{ route('users.roles_permission') }}"><i class="ti-minus"></i>Users Permission</a></li>
+                        <li><a href="#"><i class="ion ion-ios-radio-button-off"></i>Role</a></li>
+                        <li><a href="#"><i class="ion ion-ios-radio-button-off"></i>User</a></li>
+                        <li><a href="#"><i class="ion ion-ios-radio-button-off"></i>User Permission</a></li>
                     </ul>
                 </li>
 
@@ -100,9 +102,9 @@
                         </span>
                     </a>
                     <ul class="submenu mm-collapse">
-                        <li><a href="{{ route('role.index') }}"><i class="ti-minus"></i>Role</a></li>
-                        <li><a href="{{ route('users.index') }}"><i class="ti-minus"></i>Users</a></li>
-                        <li><a href="{{ route('users.roles_permission') }}"><i class="ti-minus"></i>Users Permission</a></li>
+                        <li><a href="#"><i class="ion ion-ios-radio-button-off"></i>Role</a></li>
+                        <li><a href="#"><i class="ion ion-ios-radio-button-off"></i>User</a></li>
+                        <li><a href="#"><i class="ion ion-ios-radio-button-off"></i>User Permission</a></li>
                     </ul>
                 </li>
 
@@ -116,9 +118,9 @@
                         </span>
                     </a>
                     <ul class="submenu mm-collapse">
-                        <li><a href="{{ route('role.index') }}"><i class="ti-minus"></i>Role</a></li>
-                        <li><a href="{{ route('users.index') }}"><i class="ti-minus"></i>Users</a></li>
-                        <li><a href="{{ route('users.roles_permission') }}"><i class="ti-minus"></i>Users Permission</a></li>
+                        <li><a href="#"><i class="ion ion-ios-radio-button-off"></i>Role</a></li>
+                        <li><a href="#"><i class="ion ion-ios-radio-button-off"></i>User</a></li>
+                        <li><a href="#"><i class="ion ion-ios-radio-button-off"></i>User Permission</a></li>
                     </ul>
                 </li>
 
@@ -132,7 +134,7 @@
                         </span>
                     </a>
                     <ul class="submenu mm-collapse">
-                        <li><a href="{{ route('role.index') }}"><i class="ti-minus"></i>Role</a></li>
+                        <li><a href="{{ route('role.index') }}"><i class="ion ion-ios-radio-button-off"></i>Role</a></li>
                     </ul>
                 </li>
 
@@ -146,9 +148,9 @@
                         </span>
                     </a>
                     <ul class="submenu mm-collapse">
-                        <li><a href="{{ route('role.index') }}"><i class="ti-minus"></i>Role</a></li>
-                        <li><a href="{{ route('users.index') }}"><i class="ti-minus"></i>Users</a></li>
-                        <li><a href="{{ route('users.roles_permission') }}"><i class="ti-minus"></i>Users Permission</a></li>
+                        <li><a href="#"><i class="ion ion-ios-radio-button-off"></i>Role</a></li>
+                        <li><a href="#"><i class="ion ion-ios-radio-button-off"></i>User</a></li>
+                        <li><a href="#"><i class="ion ion-ios-radio-button-off"></i>User Permission</a></li>
                     </ul>
                 </li>
 
@@ -162,9 +164,9 @@
                         </span>
                     </a>
                     <ul class="submenu mm-collapse">
-                        <li><a href="{{ route('role.index') }}"><i class="ti-minus"></i>Role</a></li>
-                        <li><a href="{{ route('users.index') }}"><i class="ti-minus"></i>Users</a></li>
-                        <li><a href="{{ route('users.roles_permission') }}"><i class="ti-minus"></i>Users Permission</a></li>
+                        <li><a href="#"><i class="ion ion-ios-radio-button-off"></i>Role</a></li>
+                        <li><a href="#"><i class="ion ion-ios-radio-button-off"></i>User</a></li>
+                        <li><a href="#"><i class="ion ion-ios-radio-button-off"></i>User Permission</a></li>
                     </ul>
                 </li>
 
@@ -178,11 +180,13 @@
                         </span>
                     </a>
                     <ul class="submenu mm-collapse">
-                        <li><a href="{{ route('role.index') }}"><i class="ti-minus"></i>Role</a></li>
-                        <li><a href="{{ route('users.index') }}"><i class="ti-minus"></i>Users</a></li>
-                        <li><a href="{{ route('users.roles_permission') }}"><i class="ti-minus"></i>Users Permission</a></li>
+                        <li><a href="#"><i class="ion ion-ios-radio-button-off"></i>Role</a></li>
+                        <li><a href="#"><i class="ion ion-ios-radio-button-off"></i>User</a></li>
+                        <li><a href="#"><i class="ion ion-ios-radio-button-off"></i>User Permission</a></li>
                     </ul>
-                </li> --}}
+                </li>
+
+                 --}}
             @can('registrasi-list')
                 <li>
                     <a href="javascript:void(0);" class="waves-effect {{ activeMenu('registrasi') }}">
@@ -198,7 +202,16 @@
                             <li>
                                 <a href="{{ route('pasien.index') }}">
                                     <i class="ion ion-ios-radio-button-off"></i>
-                                    Pasien Baru
+                                    Daftar Pasien & Cetak Kartu Pasien
+                                </a>
+                            </li>
+                        @endcan
+
+                        @can('manage-reg-rawat-jalan')
+                            <li>
+                                <a href="{{ route('rawat-jalan.pasien') }}">
+                                    <i class="ion ion-ios-radio-button-off"></i>
+                                    Reg. Rawat Jalan
                                 </a>
                             </li>
                         @endcan
@@ -207,16 +220,7 @@
                             <li>
                                 <a href="{{ route('rawat-darurat.index') }}">
                                     <i class="ion ion-ios-radio-button-off"></i>
-                                    Daftar Gawat Darurat
-                                </a>
-                            </li>
-                        @endcan
-
-                        @can('manage-reg-rawat-jalan')
-                            <li>
-                                <a href="{{ route('rawat-jalan.index') }}">
-                                    <i class="ion ion-ios-radio-button-off"></i>
-                                    Daftar Rawat Jalan
+                                    Reg. Gawat Darurat
                                 </a>
                             </li>
                         @endcan
@@ -225,7 +229,7 @@
                             <li>
                                 <a href="{{ route('rawat-inap.index') }}">
                                     <i class="ion ion-ios-radio-button-off"></i>
-                                    Daftar Rawat Inap
+                                    Reg. Rawat Inap
                                 </a>
                             </li>
                         @endcan
@@ -254,12 +258,11 @@
                         @endcan
 
                         @can('manage-user')
-                            <li>
-                                <a href="{{ route('user.index') }}">
-                                    <i class="ion ion-ios-radio-button-off"></i>
-                                    Users
-                                </a>
-                            </li>
+                        <li>
+                            <a href="{{ route('user.index') }}">
+                                <i class="ion ion-ios-radio-button-off"></i>
+                                User
+                            </a
                         @endcan
 
                         @can('manage-permission')

@@ -20,7 +20,10 @@ Route::get('/', function () {
 Auth::routes();
 
 
-Route::prefix('registrasi')->namespace('Registrasi')->group( function () {
+Route::namespace('Layanan')->group( function () {
+
+    Route::get('/rawat-jalan/pasien','RawatJalanController@pasien')->name('rawat-jalan.pasien');
+
     Route::resource('rawat-darurat','RawatDaruratController');
     Route::resource('rawat-jalan','RawatJalanController');
     Route::resource('rawat-inap','RawatInapController');

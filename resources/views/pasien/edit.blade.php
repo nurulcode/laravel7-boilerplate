@@ -161,22 +161,22 @@ User Manajement
         <div class="form-row">
             <div class="form-group col-md-3">
                 <label class=" font-weight-bold text-capitalize">Provinsi</label>
-                <select class="form-control formselect" name="provinsi" placeholder="Select Provinsi" id="provinsi"></select>
+                <select class="form-control select2" name="provinsi" placeholder="Select Provinsi" id="provinsi"></select>
                 <small class="text-danger provinsi"></small>
             </div>
             <div class="form-group col-md-3">
                 <label class=" font-weight-bold text-capitalize">Kebupaten</label>
-                <select class="form-control formselect" name="kabupaten" placeholder="Select Kabupaten" id="kabupaten"></select>
+                <select class="form-control select2" name="kabupaten" placeholder="Select Kabupaten" id="kabupaten"></select>
                 <small class="text-danger kabupaten"></small>
             </div>
             <div class="form-group col-md-3">
                 <label class=" font-weight-bold text-capitalize">Kecamatan</label>
-                <select class="form-control formselect" name="kecamatan" placeholder="Select Kecamatan" id="kecamatan"></select>
+                <select class="form-control select2" name="kecamatan" placeholder="Select Kecamatan" id="kecamatan"></select>
                 <small class="text-danger kecamatan"></small>
             </div>
             <div class="form-group col-md-3">
                 <label class=" font-weight-bold text-capitalize">Kelurahan</label>
-                <select class="form-control formselect" name="kelurahan_id" placeholder="Select Kelurahan" id="kelurahan"></select>
+                <select class="form-control select2" name="kelurahan_id" placeholder="Select Kelurahan" id="kelurahan"></select>
                 <small class="text-danger kelurahan"></small>
             </div>
         </div>
@@ -215,7 +215,7 @@ User Manajement
         <hr>
         <div class="form-group mb-0 text-right">
             <div>
-                <button type="submit" class="btn btn-primary waves-effect waves-light pr-5 pl-5">Submit</button>
+                <button type="submit" class="btn btn-primary waves-effect waves-light pr-5 pl-5" id="button-submit">Submit</button>
             </div>
         </div>
     </form>
@@ -226,8 +226,6 @@ User Manajement
 
 <script>
     const pasien = {!! $pasien !!}
-
-
     $(function () {
         $("#datepicker-autoclose1").datepicker({
             autoclose: !0,
@@ -235,9 +233,20 @@ User Manajement
         });
     });
 
+    $(document).ready(function () {
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $.get('/pasien/'+ pasien.id +'/detail',
+            function (data) {
+                dataPribadi(data.data, false)
+            })
+    });
+
     function dataPribadi(data, err) {
         let status = '.'
-
         if (!err) {
             $('#id').val(data.id)
             $('#no_rekam_medis').val(data.no_rekam_medis)
@@ -263,35 +272,23 @@ User Manajement
             $('#suku').val(data.suku)
             $('#golongan_darah').val(data.golongan_darah)
         } else {
-        $('.id').text(data.id ?? '')
-        $('.no_rekam_medis').text(data.no_rekam_medis ?? '')
-        $('.alamat').text(data.alamat ?? '')
-        $('.nama').text(data.nama ?? '')
-        $('.nama_ibu').text(data.nama_ibu ?? '')
-        $('.tanggal_lahir').text(data.tanggal_lahir ?? '')
-        $('.tempat_lahir').text(data.tempat_lahir ?? '')
-        $('.jenis_kelamin').text(data.jenis_kelamin ?? '')
-    }
+            $('.id').text(data.id ?? '')
+            $('.no_rekam_medis').text(data.no_rekam_medis ?? '')
+            $('.alamat').text(data.alamat ?? '')
+            $('.nama').text(data.nama ?? '')
+            $('.nama_ibu').text(data.nama_ibu ?? '')
+            $('.tanggal_lahir').text(data.tanggal_lahir ?? '')
+            $('.tempat_lahir').text(data.tempat_lahir ?? '')
+            $('.jenis_kelamin').text(data.jenis_kelamin ?? '')
+        }
     }
 
-    $(document).ready(function () {
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
 
-        $.get('/pasien/'+ pasien.id +'/detail',
-            function (data) {
-                dataPribadi(data.data, false)
-            })
-    });
 
     if ($("#form").length > 0) {
         $("#form").validate({
             submitHandler: function (e) {
                 var actionType = $('#button-submit').val();
-                $('#button-submit').html('Sending..');
                 $.ajax({
                     data: $('#form')
                         .serialize(),
@@ -299,10 +296,11 @@ User Manajement
                     type: "PUT",
                     dataType: 'json',
                     success: function (data) {
-                        $('#form').trigger("reset");
                         $('#button-submit').html('Simpan');
+                        $('#button-submit').prop('disabled', true);
                         toast(data);
                         setInterval(() => {
+                            $('#form').trigger("reset");
                             window.location.href = '{{ route('pasien.index') }}';
                         }, 1000);
                     },
@@ -318,7 +316,6 @@ User Manajement
             }
         })
     }
-
 </script>
 
 <script src="{{ asset('assets\js\wilayah.js') }}"></script>

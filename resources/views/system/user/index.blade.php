@@ -32,6 +32,7 @@ User Manajement
 
 @include('system.user.delete')
 @include('system.user.create')
+@include('system.user.show')
 @endsection
 
 @section('javascript')

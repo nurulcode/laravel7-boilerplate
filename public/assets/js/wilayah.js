@@ -1,13 +1,7 @@
 $(document).ready(function () {
 
 
-
-    let kelurahan = pasien.kelurahan
-    if (kelurahan) {
-        let provinsi = pasien.kelurahan.kecamatan.kabupaten.provinsi
-        let kabupaten = pasien.kelurahan.kecamatan.kabupaten
-        let kecamatan = pasien.kelurahan.kecamatan
-
+    function getProvinsi(provinsi) {
         $.ajax({
             type: 'GET',
             url: '/provinsi',
@@ -18,7 +12,16 @@ $(document).ready(function () {
                 });
             }
         });
+    }
 
+
+    let kelurahan = pasien.kelurahan
+    if (kelurahan) {
+        let provinsi = pasien.kelurahan.kecamatan.kabupaten.provinsi
+        let kabupaten = pasien.kelurahan.kecamatan.kabupaten
+        let kecamatan = pasien.kelurahan.kecamatan
+
+        getProvinsi(provinsi)
         $.ajax({
             type: 'GET',
             url: '/kabupaten/' + provinsi.id,
@@ -52,10 +55,9 @@ $(document).ready(function () {
             }
         });
 
+    } else {
+        getProvinsi(provinsi)
     }
-
-
-
 
 
     $.ajax({

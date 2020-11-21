@@ -2,7 +2,7 @@
 
 namespace App\Models\Master\Wilayah;
 
-use App\Models\Registrasi\Pasien;
+use App\Models\Pasien;
 use Illuminate\Database\Eloquent\Model;
 
 class Kelurahan extends Model
@@ -13,6 +13,9 @@ class Kelurahan extends Model
     {
         return $this->belongsTo(Kecamatan::class);
     }
+
+    public function pasien()
+    {
+        return $this->hasMany(Pasien::class);
+    }
 }
-
-

@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Registrasi;
+namespace App\Http\Controllers\Layanan;
 
-use App\Models\Registrasi\RawatJalan;
+use App\Models\Registrasi\RawatInap;
 use Illuminate\Http\Request;
 
-class RawatJalanController extends Controller
+class RawatInapController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -41,10 +41,10 @@ class RawatJalanController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\RawatJalan  $rawatJalan
+     * @param  \App\RawatInap  $rawatInap
      * @return \Illuminate\Http\Response
      */
-    public function show(RawatJalan $rawatJalan)
+    public function show(RawatInap $rawatInap)
     {
         //
     }
@@ -52,10 +52,10 @@ class RawatJalanController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\RawatJalan  $rawatJalan
+     * @param  \App\RawatInap  $rawatInap
      * @return \Illuminate\Http\Response
      */
-    public function edit(RawatJalan $rawatJalan)
+    public function edit(RawatInap $rawatInap)
     {
         //
     }
@@ -64,10 +64,10 @@ class RawatJalanController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\RawatJalan  $rawatJalan
+     * @param  \App\RawatInap  $rawatInap
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, RawatJalan $rawatJalan)
+    public function update(Request $request, RawatInap $rawatInap)
     {
         //
     }
@@ -75,10 +75,10 @@ class RawatJalanController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\RawatJalan  $rawatJalan
+     * @param  \App\RawatInap  $rawatInap
      * @return \Illuminate\Http\Response
      */
-    public function destroy(RawatJalan $rawatJalan)
+    public function destroy(RawatInap $rawatInap)
     {
         //
     }

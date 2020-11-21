@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Perawatan;
+namespace App\Http\Controllers\Layanan;
 
 use App\Http\Controllers\Controller as BaseController;
 
